@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styles from "./HeaderAvatar.module.css";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { IoIosSettings } from "react-icons/io";
-import { FaGithub } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { RiHome7Fill } from "react-icons/ri";
@@ -34,17 +32,6 @@ const HeaderAvatar = () => {
             <Link to="/profile">
               <p className={styles.option}>
                 <FaUserPlus /> Profile
-              </p>
-            </Link>
-            <Link to="/settings">
-              <p className={styles.option}>
-                <IoIosSettings />
-                Settings
-              </p>
-            </Link>
-            <Link to="https://www.github.com/utkkkarshhh">
-              <p className={styles.option}>
-                <FaGithub /> Github
               </p>
             </Link>
             <Link to="/">

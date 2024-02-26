@@ -6,7 +6,7 @@ import Divider from "../../Reusables/Divider";
 import { Link, useNavigate } from "react-router-dom";
 
 const HeroCard = () => {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const sendMessageHandler = () => {
@@ -30,7 +30,7 @@ const HeroCard = () => {
       <Link to="/register">
         <SuperButton title="Register" />
       </Link>
-      <Divider />
+      <Divider text="or" />
       <div className={styles.usernameInput}>
         <p>Send Message</p>
         <input
