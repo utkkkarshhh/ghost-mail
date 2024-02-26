@@ -20,6 +20,14 @@
   width: 40%;
 }
 
+.loaderContainer {
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; 
+}
+
 @media only screen and (max-width: 600px) {
   .section1 {
     width: 90%;

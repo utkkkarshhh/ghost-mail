@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ProfilePage.module.css";
+import styles from "./SettingsPage.module.css";
 import Loader from "../UI/Loaders/Loader";
 
-const ProfilePage = () => {
+const SettingsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -11,18 +11,17 @@ const ProfilePage = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
   return (
-    <div className={styles.profilePage}>
+    <div className={styles.settingsPage}>
       {isLoading ? (
         <div className={styles.loaderContainer}>
           <Loader />
         </div>
       ) : (
-        <p>Profile Page</p>
+        <p>Settings Page</p>
       )}
     </div>
   );
 };
 
-export default ProfilePage;
+export default SettingsPage;

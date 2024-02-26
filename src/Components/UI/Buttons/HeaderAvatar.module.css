@@ -1,0 +1,78 @@
+.headerAvatar {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  transition: 200ms;
+  font-weight: bold;
+}
+
+.headerAvatar:hover {
+  background-color: rgb(232, 231, 231);
+  color: black;
+}
+
+.avatar {
+  padding: 5px 5px 0 5px;
+  margin-right: 10px;
+}
+
+.avatarImage {
+  max-width: fit-content;
+  height: auto;
+  color: black;
+}
+
+.navButton {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* .navButton:hover {
+  color: white;
+  font-weight: 500;
+} */
+
+.optionBox {
+  position: absolute;
+  width: 10%;
+  right: 20px;
+  top: 60px;
+  background: white;
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 13px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.option {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 12px;
+}
+
+.option:hover {
+  background-color: rgb(189, 203, 233);
+}
+
+@media only screen and (max-width: 600px) {
+    .optionBox {
+        width: 30%;
+    }
+}

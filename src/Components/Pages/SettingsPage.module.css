@@ -1,0 +1,12 @@
+.settingsPage {
+  margin: 70px auto;
+  color: white;
+}
+
+.loaderContainer {
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
