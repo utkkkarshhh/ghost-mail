@@ -1,0 +1,54 @@
+.mailCard {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  margin: 10px;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
+  color: black;
+  width: 90%;
+  height: auto;
+  padding: 20px 30px 10px 30px;
+  border-radius: 12px;
+  border: 1px solid black;
+  cursor: crosshair;
+}
+
+.bottomSection {
+  padding: 20px 0px 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.time {
+  font-size: 10px;
+  color: grey;
+}
+
+.shareButton {
+  border: none;
+  background-color: transparent;
+  color: grey;
+  cursor: pointer;
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.deleteButton {
+  border: none;
+  background-color: transparent;
+  color: rgb(242, 119, 119);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+@media only screen and (max-width: 600px) {
+  .mailCard {
+    width: 110%;
+    height: auto;
+  }
+}

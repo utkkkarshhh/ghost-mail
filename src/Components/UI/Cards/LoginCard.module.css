@@ -1,0 +1,80 @@
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #040f3f;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: fit-content;
+  padding: 20px 40px 30px 40px;
+  border-radius: 12px;
+  border: 1px solid white;
+}
+
+.loginCardHeader {
+  align-items: center;
+  margin: 10px 0px 20px 0px;
+}
+
+.loginCardHeader {
+  font-size: 12px;
+}
+
+.nowText {
+  color: #03c5ca;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formInput {
+  font-family: Poppins;
+  padding: 10px 30px 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #03c5ca;
+  margin: 10px 0px;
+}
+
+.loginForm label {
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+}
+
+.forgetMessage {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 20px auto 0px auto;
+  margin-top: 10px;
+}
+
+.forgetMessage a:link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.forgetMessage a:visted {
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .loginCard {
+    width: 90%;
+    padding: 20px 40px 20px 40px;
+  }
+  .forgetMessage {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 10px;
+  }
+}

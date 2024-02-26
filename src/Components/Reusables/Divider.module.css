@@ -1,0 +1,17 @@
+.divider {
+  display: flex;
+  align-items: center;
+  color: white(0, 0, 0, 0.3);
+  margin: 20px auto;
+}
+
+.line {
+  height: 1px;
+  background-color: #e6e6e6;
+  width: 60px;
+  margin: 0 auto;
+}
+
+.text {
+  margin: 0 10px;
+}

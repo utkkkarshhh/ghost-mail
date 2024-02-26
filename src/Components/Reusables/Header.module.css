@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Kode+Mono:wght@400..700&display=swap");
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 30px;
+  height: 70px;
+  width: 100vw;
+  background-color: #040f3f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.navbar .logo {
+  font-size: 20px;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  color: white;
+}
+
+.mailText {
+  font-weight: bold;
+  color: #03c5ca;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    padding-left: 30px;
+    padding-right: 10px;
+  }
+}

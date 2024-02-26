@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Kode+Mono:wght@400..700&display=swap");
+
+.button1 {
+  font-family: Poppins;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  padding: 10px 15px;
+  gap: 9px;
+  align-items: center;
+  margin: auto 10px;
+  background-color: #03c5ca;
+  outline: 1px white solid;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button1:hover {
+  background-color: #007acc;
+}
+
+.button1 .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.vector {
+  height: 20px;
+}
+
+.button1 .vector {
+  transition: 400ms;
+}
+
+.button1:hover {
+  background-color: white;
+}
+
+.button1:hover .text {
+  color: #03c5ca;
+}
+
+.button1:hover .vector {
+  color: #03c5ca;
+}
+
+@media only screen and (max-width: 600px) {
+  .button1{
+    padding: 5px 10px;
+    gap: 2px;
+    margin: auto 5px;
+  }
+  .button1 .text{
+    font-size: 0.8em;
+  }
+}

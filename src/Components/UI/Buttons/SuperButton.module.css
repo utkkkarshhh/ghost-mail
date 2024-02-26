@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Kode+Mono:wght@400..700&display=swap");
+
+.spbtn {
+  font-family: Poppins;
+  font-weight: bold;
+  color: white;
+  padding: 10px 30px;
+  align-items: center;
+  margin: auto 10px auto 10px;
+  background-color: #03c5ca;
+  outline: 1px white solid;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.spbtn:hover {
+  background-color: white;
+  color: #03c5ca;
+}
+
+.spbtn .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.disabled {
+  background-color: #707070;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  background-color: rgb(220, 90, 90);
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .spbtn {
+    padding: 5px 10px;
+    gap: 2px;
+    margin: auto 5px;
+  }
+  .spbtn .text {
+    font-size: 0.8em;
+  }
+}
