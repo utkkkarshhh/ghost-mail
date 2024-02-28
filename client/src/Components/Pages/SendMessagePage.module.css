@@ -1,0 +1,81 @@
+.sendMessageCard {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #040f3f;
+  color: white;
+  width: 50%;
+  height: auto;
+  padding: 30px;
+  padding: 20px 40px;
+  border-radius: 12px;
+  border: 1px solid white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.upperSection {
+  margin: 20px auto;
+  align-items: center;
+  text-align: center;
+}
+
+.homepageSendMessageParagraph {
+  font-size: 12px;
+}
+
+.homepageSendMessageSpan {
+  color: #03c5ca;
+}
+
+.lowerSection {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.landingPageMessageInput {
+  display: flex;
+  font-family: Poppins;
+  margin: 0px 0px 20px 0px;
+  padding: 20px 20px;
+  height: 30vh;
+  width: 100%;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  text-align: left;
+}
+
+.landingPageMessageInput:focus {
+  border: 2px solid #03c5ca;
+  font-weight: 400;
+}
+
+.sendButton {
+  margin: 0 auto;
+}
+
+.messagePageError{
+  font-size: 12px;
+  padding-top: 10px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .sendMessageCard {
+    width: 90%;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .homepageSendMessageHeading {
+    font-size: 22px;
+  }
+}

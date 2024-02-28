@@ -1,0 +1,101 @@
+.heroCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #040f3f;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 45vh;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid white;
+}
+
+.heroUpperSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.intro {
+  color: white;
+  font-size: 40px;
+  font-family: "Kode Mono", monospace;
+  font-weight: bold;
+}
+
+.title {
+  font-weight: 700;
+  color: white;
+}
+
+.mailText {
+  font-weight: bold;
+  color: #03c5ca;
+}
+
+.tagline {
+  padding: 10px 0 20px; /* Adjusted padding */
+}
+
+.messageUsername {
+  font-family: Poppins;
+  background-color: rgb(80, 79, 79);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 22px;
+  outline: none;
+  border: 1px solid white;
+  width: 100%;
+}
+
+.usernameInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.usernameInput p {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.messageUsername::placeholder {
+  color: rgb(33, 21, 21);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+  .heroCard {
+    width: 90%;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .intro {
+    font-size: 28px;
+  }
+
+  .usernameInput p {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .usernameInput {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .messageUsername {
+    width: 95%;
+    margin: auto;
+  }
+}

@@ -1,0 +1,82 @@
+.registerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #040f3f;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: auto;
+  padding: 20px 40px 30px 40px;
+  border-radius: 12px;
+  border: 1px solid white;
+}
+
+.registerCardHeader {
+  align-items: center;
+  margin: 10px 0px 20px 0px;
+}
+
+.registerCardHeader {
+  font-size: 12px;
+}
+
+.nowText {
+  color: #03c5ca;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formInput {
+  font-family: Poppins;
+  padding: 10px 30px 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #03c5ca;
+  margin: 10px 0px;
+}
+
+.registerForm label {
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+}
+
+.forgetMessage {
+  display: flex;
+}
+
+.forgetMessage p {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 20px auto 0px auto;
+  margin-top: 10px;
+}
+
+.error {
+  font-size: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .registerCard {
+    margin-top: 10px;
+    margin-bottom: 100px;
+    width: 95%;
+    padding: 20px 20px 30px 20px;
+    height: fit-content;
+  }
+  .forgetMessage p {
+    padding-top: 20px;
+    font-size: 10px;
+  }
+}
