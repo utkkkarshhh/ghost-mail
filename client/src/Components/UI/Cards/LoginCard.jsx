@@ -13,9 +13,12 @@ const LoginCard = () => {
     event.preventDefault();
     try {
       authCtx.onLogin(username, password);
-      setUsername("");
-      setPassword("");
-      setErrorMessage("Login Successful");
+      if (authCtx.isLoggedIn) {
+        setPassword("");
+        setErrorMessage("Login Successful");
+      } else {
+        setErrorMessage("Login Failed");
+      }
     } catch (error) {
       console.log("Error logging in! ", error);
       setErrorMessage("Error logging in. Please try again.");

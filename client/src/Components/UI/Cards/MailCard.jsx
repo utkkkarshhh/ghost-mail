@@ -16,7 +16,7 @@ const MailCard = (props) => {
         <div className={styles.bottomSectionButtons}>
           <button
             className={styles.shareButton}
-            onClick={props.onShare}
+            onClick={() => props.onShare(props.id)}
             title="Share with your friends!"
           >
             <FaShare />
@@ -24,7 +24,7 @@ const MailCard = (props) => {
 
           <button
             className={styles.deleteButton}
-            onClick={props.onDelete}
+            onClick={() => props.onClick(props.id)}
             title="Delete this message!"
           >
             <MdDeleteForever />

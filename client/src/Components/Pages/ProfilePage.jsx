@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import styles from "./ProfilePage.module.css";
 import Loader from "../UI/Loaders/Loader";
 import { FaUser } from "react-icons/fa";
@@ -8,17 +8,34 @@ import { Link } from "react-router-dom";
 import Avatar from "../../assets/images/Avatar.jpeg";
 import { MdUploadFile } from "react-icons/md";
 import Divider from "../Reusables/Divider";
+import axios from "axios";
+import AuthContext from "../store/AuthContext";
 
 const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isProfileOpen, setIsProfileOpen] = useState(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  //Form State
+  const { onLogout } = useContext(AuthContext);
 
+  const URL = "http://localhost:8008";
+
+  //Form State
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
+
+  const accountDeleteHandler = (event) => {
+    console.log(event);
+    try {
+      axios.delete(`${URL}/deleteAccount`, { data: { username: "" } });
+      alert("We hate to see you go!");
+      onLogout();
+    } catch (error) {
+      alert("Error deleting your account");
+      console.log("Error deleting your account!", error);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -167,14 +184,20 @@ const ProfilePage = () => {
                   </h1>
                   <div className={styles.deleteAccount}>
                     <h3 className={styles.deleteAccountHeading}>
-                      Delete your{" "}
-                      <span className={styles.deleteAccountSpan}>account!</span>
+                      Delete your
+                      <span className={styles.deleteAccountSpan}>
+                        {" "}
+                        account!
+                      </span>
                     </h3>
                     <p className={styles.deleteAccountText}>
                       This is a permanent action. You can come back anytime
                       you'd like.
                     </p>
-                    <SuperButton title="Delete Now" />
+                    <SuperButton
+                      title="Delete Now"
+                      onClick={accountDeleteHandler}
+                    />
                   </div>
                   <div className={styles.contactDeveloper}>
                     <h3 className={styles.contactDeveloperHeading}>

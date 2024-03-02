@@ -74,6 +74,25 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.delete("/deleteAccount", async (req, res) => {
+  const { username } = req.body;
+  try {
+    const response = await db.query("DELETE FROM users WHERE username = $1", [
+      username,
+    ]);
+    if (response.rowCount > 0) {
+      res
+        .status(200)
+        .json({ success: true, message: "User account deleted successfully" });
+    } else {
+      res.status(404).json({ success: false, error: "User account not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
 // app.delete("/logout", (req, res) => {
 //   try {
 //   } catch (error) {
@@ -125,6 +144,38 @@ app.post("/send", async (req, res) => {
     }
   } catch (error) {
     console.error("Error sending message:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+app.get("/getMessages", async (req, res) => {
+  const username = "utkarsh";
+  try {
+    const response = await db.query(
+      "SELECT * FROM messages WHERE username = $1",
+      [username]
+    );
+    res.json({ success: true, message: response.rows });
+  } catch (error) {
+    console.error("Error getting messages:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+app.delete("/deleteMessage", async (req, res) => {
+  const { id } = req.body;
+  try {
+    const response = await db.query("SELECT * FROM messages WHERE id = $1", [
+      id,
+    ]);
+    if (response.rows.length > 0) {
+      await db.query("DELETE FROM messages WHERE id = $1", [id]);
+      res.status(200).json({ success: true, message: "Message deleted" });
+    } else {
+      res.status(404).json({ success: false, error: "Message not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting message:", error);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 });

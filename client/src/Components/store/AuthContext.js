@@ -22,21 +22,13 @@ export const AuthContextProvider = (props) => {
 
   const loginHandler = async (username, password) => {
     try {
-      await axios.post(
-        `${URL}/login`,
-        { username, password },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      await axios.post(`${URL}/login`, { username, password });
       setIsLoggedIn(true);
       localStorage.setItem("isLoggedIn", true);
-      // window.location.href = "/home";
-
+      window.location.href = "/home";
       console.log("Value of isLoggedIn: " + isLoggedIn);
     } catch (error) {
       console.log("Error logging in! ", error);
-      throw new Error("Error logging in. Please try again.");
     }
   };
 
