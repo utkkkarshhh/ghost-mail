@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./LoginCard.module.css";
 import SuperButton from "../Buttons/SuperButton";
-import axios from "axios";
+import AuthContext from "../../store/AuthContext";
 
 const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  const URL = "http://localhost:8008";
+  const authCtx = useContext(AuthContext);
 
   const loginHandler = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${URL}/login`, { username, password });
+      authCtx.onLogin(username, password);
       setUsername("");
       setPassword("");
       setErrorMessage("Login Successful");

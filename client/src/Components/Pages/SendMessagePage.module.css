@@ -58,14 +58,53 @@
   font-weight: 400;
 }
 
+.landingPageMessageUsername {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  margin: auto auto 10px;
+}
+
+.atIcon {
+  color: black;
+  padding: 15px 10px 10px 10px;
+  background-color: rgb(206, 205, 205);
+  border-radius: 12px;
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+}
+
+.landingPageMessageUsernameField {
+  width: 90%;
+  padding: 6px 20px 6px 5px;
+  font-family: Poppins;
+  font-family: 700;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  text-align: left;
+}
+
+.landingPageMessageUsernameField:focus {
+  font-weight: 400;
+}
+
 .sendButton {
   margin: 0 auto;
 }
 
-.messagePageError{
+.messagePageError {
   font-size: 12px;
   padding-top: 10px;
   margin: 0 auto;
+}
+.messagePageFormError {
+  font-size: 12px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 @media only screen and (max-width: 600px) {
@@ -78,4 +117,13 @@
   .homepageSendMessageHeading {
     font-size: 22px;
   }
+
+  .landingPageMessageUsernameField {
+    width: 80%;
+  }
+
+  .messagePageFormError {
+    text-align: center;
+  }
+
 }

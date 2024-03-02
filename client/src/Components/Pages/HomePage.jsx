@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import styles from "./HomePage.module.css";
 import MailCard from "../UI/Cards/MailCard";
 import secrets from "../secrets";
@@ -15,24 +15,26 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className={styles.homepage}>
-      {isLoading ? (
-        <div className={styles.loaderContainer}>
-          <Loader />
-        </div>
-      ) : (
-        <div className={styles.section1}>
-          {secrets.map((secret) => (
-            <MailCard
-              key={secret.id}
-              id={secret.id}
-              message={secret.message}
-              time={secret.receivedTime}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <Fragment>
+      <div className={styles.homepage}>
+        {isLoading ? (
+          <div className={styles.loaderContainer}>
+            <Loader />
+          </div>
+        ) : (
+          <div className={styles.section1}>
+            {secrets.map((secret) => (
+              <MailCard
+                key={secret.id}
+                id={secret.id}
+                message={secret.message}
+                time={secret.receivedTime}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </Fragment>
   );
 };
 
