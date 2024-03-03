@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./RegisterCard.module.css";
 import SuperButton from "../Buttons/SuperButton";
 import axios from "axios";
+import { baseUrl } from "../../data/baseUrl";
 
 const RegisterCard = () => {
   const [email, setEmail] = useState("");
@@ -12,12 +13,10 @@ const RegisterCard = () => {
   const [passwordValidity, setPasswordValidity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const URL = "http://localhost:8008";
-
   const registerHandler = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${URL}/register`, { email, username, password });
+      await axios.post(`${baseUrl}/register`, { email, username, password });
       setEmail("");
       setUsername("");
       setPassword("");
@@ -135,9 +134,7 @@ const RegisterCard = () => {
           }
         />
       </form>
-      {errorMessage && (
-        <p className={styles.error}>{errorMessage}</p>
-      )}
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <div className={styles.forgetMessage}>
         <p>
           Already have an account? <Link to="/login">Click here!</Link>

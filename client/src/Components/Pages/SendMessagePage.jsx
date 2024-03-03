@@ -5,6 +5,7 @@ import SuperButton from "../UI/Buttons/SuperButton";
 import { FiAtSign } from "react-icons/fi";
 import { validateMessageForm } from "../store/MessageFormValidation";
 import axios from "axios";
+import { baseUrl } from "../data/baseUrl";
 
 const SendMessagePage = () => {
   const { username: usernameParam } = useParams("");
@@ -15,7 +16,6 @@ const SendMessagePage = () => {
   const [formDisabled, setFormDisabled] = useState(false);
   const [formError, setFormError] = useState("");
   const navigate = useNavigate();
-  const URL = "http://localhost:8008";
 
   const usernameChangeHandler = (event) => {
     event.preventDefault();
@@ -41,7 +41,7 @@ const SendMessagePage = () => {
   const handleMessageSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${URL}/send`, { message, username });
+      await axios.post(`${baseUrl}/send`, { message, username });
       setErrorMessage("Message sent successfully to @" + username);
       console.log("Message sent successfully");
       setMessage("");
@@ -61,7 +61,7 @@ const SendMessagePage = () => {
     }
   };
 
-  return (
+  const renderForm = (
     <div className={styles.sendMessageCard}>
       <div className={styles.upperSection}>
         <h1 className={styles.homepageSendMessageHeading}>
@@ -114,6 +114,8 @@ const SendMessagePage = () => {
       </div>
     </div>
   );
+
+  return renderForm;
 };
 
 export default SendMessagePage;

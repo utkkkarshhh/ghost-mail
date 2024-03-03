@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const URL = "http://localhost:8008";
+import { baseUrl } from "../../Components/data/baseUrl";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -10,23 +10,28 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true"
+    localStorage.getItem("accessToken") ? true : false
   );
 
   useEffect(() => {
-    const storedLoginStatus = localStorage.getItem("isLoggedIn");
-    if (storedLoginStatus && storedLoginStatus === "true") {
+    const storedAccessToken = localStorage.getItem("accessToken");
+    if (storedAccessToken) {
       setIsLoggedIn(true);
     }
   }, []);
 
   const loginHandler = async (username, password) => {
     try {
-      await axios.post(`${URL}/login`, { username, password });
-      setIsLoggedIn(true);
-      localStorage.setItem("isLoggedIn", true);
-      window.location.href = "/home";
-      console.log("Value of isLoggedIn: " + isLoggedIn);
+      await axios
+        .post(`${baseUrl}/login`, { username, password })
+        .then((response) => {
+          if (response.status === 200 && response.data.accessToken) {
+            setIsLoggedIn(true);
+            localStorage.setItem("accessToken", response.data.accessToken);
+            window.location.href = "/home";
+            console.log("Value of isLoggedIn: " + isLoggedIn);
+          }
+        });
     } catch (error) {
       console.log("Error logging in! ", error);
     }
@@ -34,7 +39,7 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", false);
+    localStorage.removeItem("accessToken");
   };
 
   return (

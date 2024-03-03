@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import styles from "./HomePage.module.css";
 import MailCard from "../UI/Cards/MailCard";
 import Loader from "../UI/Loaders/Loader";
+import { baseUrl } from "../../Components/data/baseUrl";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [secrets, setSecrets] = useState([]);
-
-  const URL = "http://localhost:8008";
 
   const messageShareHandler = (id) => {
     alert(
@@ -20,7 +20,7 @@ const HomePage = () => {
 
   const messageDeleteHandler = async (id) => {
     try {
-      await axios.delete(`${URL}/deleteMessage`, { data: { id } });
+      await axios.delete(`${baseUrl}/deleteMessage`, { data: { id } });
       setSecrets(secrets.filter((secret) => secret.id !== id));
     } catch (error) {
       console.error("Error deleting message:", error);
@@ -30,7 +30,15 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${URL}/getMessages`);
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+          console.log("Access token not found!");
+          return;
+        }
+        const decodedData = jwtDecode(accessToken);
+        const response = await axios.get(`${baseUrl}/getMessages`, {
+          params: { decodedData },
+        });
         if (response.data.success) {
           setSecrets(response.data.message);
         } else {

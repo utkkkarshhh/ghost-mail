@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authToken = require("./middlewares/authToken");
 const { format } = require("date-fns");
 const db = require("./database");
 const profanity = require("profanity-hindi");
@@ -58,10 +57,20 @@ app.post("/login", async (req, res) => {
         user.rows[0].password
       );
       if (passwordMatch) {
-        res
-          .status(200)
-          .json({ success: true, message: "Logged in successfully" });
-        console.log({ success: true, message: "Logged in successfully" });
+        const data = {
+          username: user.rows[0].username,
+          name: user.rows[0].name,
+          tokenVersion: user.rows[0].tokenVersion,
+        };
+        const accessToken = jwt.sign(data, "Johnny Johnny Yes Papa", {
+          expiresIn: "7d",
+        });
+        res.status(200).json({
+          success: true,
+          message: "Logged in successfully",
+          accessToken,
+        });
+        console.log("Logged in successfully", user.rows);
       } else {
         res.status(401).json({ success: false, error: "Incorrect password" });
       }
@@ -93,13 +102,14 @@ app.delete("/deleteAccount", async (req, res) => {
   }
 });
 
-// app.delete("/logout", (req, res) => {
-//   try {
-//   } catch (error) {
-//     console.error("Error logging out user:", error);
-//     res.status(500).json({ success: false, error: "Internal server error" });
-//   }
-// });
+app.delete("/logout", (req, res) => {
+  try {
+  } catch (error) {
+    console.error("Error logging out user:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
 
 //Messaging Logic
 
@@ -149,8 +159,9 @@ app.post("/send", async (req, res) => {
 });
 
 app.get("/getMessages", async (req, res) => {
-  const username = "utkarsh";
+  const { decodedData } = req.query;
   try {
+    const { username } = decodedData;
     const response = await db.query(
       "SELECT * FROM messages WHERE username = $1",
       [username]

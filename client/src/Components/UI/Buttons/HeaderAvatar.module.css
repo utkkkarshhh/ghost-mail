@@ -44,7 +44,7 @@
 
 .optionBox {
   position: absolute;
-  width: 10%;
+  width: 12%;
   right: 20px;
   top: 60px;
   background: white;
@@ -57,7 +57,8 @@
 
 .option {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-direction: row-reverse;
   align-items: center;
   width: 100%;
   padding-top: 5px;

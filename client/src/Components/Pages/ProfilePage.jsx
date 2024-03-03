@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Avatar from "../../assets/images/Avatar.jpeg";
 import { MdUploadFile } from "react-icons/md";
 import Divider from "../Reusables/Divider";
+import { baseUrl } from "../data/baseUrl";
 import axios from "axios";
 import AuthContext from "../store/AuthContext";
 
@@ -18,8 +19,6 @@ const ProfilePage = () => {
 
   const { onLogout } = useContext(AuthContext);
 
-  const URL = "http://localhost:8008";
-
   //Form State
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
@@ -28,7 +27,7 @@ const ProfilePage = () => {
   const accountDeleteHandler = (event) => {
     console.log(event);
     try {
-      axios.delete(`${URL}/deleteAccount`, { data: { username: "" } });
+      axios.delete(`${baseUrl}/deleteAccount`, { data: { username: "" } });
       alert("We hate to see you go!");
       onLogout();
     } catch (error) {
