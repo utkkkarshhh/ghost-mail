@@ -23,7 +23,7 @@ export const AuthContextProvider = (props) => {
   const loginHandler = async (username, password) => {
     try {
       await axios
-        .post(`${baseUrl}/login`, { username, password })
+        .post(`${baseUrl}/user/login`, { username, password })
         .then((response) => {
           if (response.status === 200 && response.data.accessToken) {
             setIsLoggedIn(true);

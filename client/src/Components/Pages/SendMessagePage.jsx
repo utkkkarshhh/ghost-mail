@@ -41,7 +41,10 @@ const SendMessagePage = () => {
   const handleMessageSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${baseUrl}/send`, { message, username });
+      await axios.post(`${baseUrl}/message/sendMessage`, {
+        message,
+        username,
+      });
       setErrorMessage("Message sent successfully to @" + username);
       console.log("Message sent successfully");
       setMessage("");

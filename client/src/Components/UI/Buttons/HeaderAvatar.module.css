@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: row;
   background-color: white;
-  padding: 3px 10px;
-  border-radius: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
   transition: 200ms;
   font-weight: bold;
 }
@@ -14,17 +13,20 @@
 .headerAvatar:hover {
   background-color: rgb(232, 231, 231);
   color: black;
+  cursor: pointer;
 }
 
 .avatar {
-  padding: 5px 5px 0 5px;
-  margin-right: 10px;
+  padding: 6px 5px 0 5px;
+  margin-right: 6px;
 }
 
-.avatarImage {
-  max-width: fit-content;
+.avatar img {
   height: auto;
   color: black;
+  width: 30px;
+  border-radius: 20px;
+  border: 1px solid grey;
 }
 
 .navButton {
@@ -32,9 +34,17 @@
   background-color: transparent;
   outline: none;
   font-family: Poppins;
-  font-weight: 500;
   font-size: 12px;
   font-weight: bold;
+}
+
+.avatarButton {
+  display: flex;
+  flex-direction: row;
+}
+
+.avatarArrowButton {
+  padding-top: 4px;
 }
 
 /* .navButton:hover {
@@ -46,12 +56,13 @@
   position: absolute;
   width: 12%;
   right: 20px;
-  top: 60px;
+  top: 70px;
   background: white;
   text-align: center;
   padding: 10px 10px;
   font-size: 13px;
-  border-radius: 12px;
+  font-weight: 300;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -61,19 +72,16 @@
   flex-direction: row-reverse;
   align-items: center;
   width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
 
 .option:hover {
-  background-color: rgb(189, 203, 233);
+  background-color: rgb(221, 230, 248);
 }
 
 @media only screen and (max-width: 600px) {
-    .optionBox {
-        width: 30%;
-    }
+  .optionBox {
+    width: 40%;
+  }
 }

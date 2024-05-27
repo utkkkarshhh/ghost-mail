@@ -9,7 +9,7 @@ import "./App.css";
 import Header from "./Components/Reusables/Header";
 import Footer from "./Components/Reusables/Footer";
 import LandingPage from "./Components/Pages/LandingPage";
-import HomePage from "./Components/Pages/HomePage";
+import Home from "./Components/Pages/Home";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import LoginPage from "./Components/Pages/LoginPage";
 import RegisterPage from "./Components/Pages/RegisterPage";
@@ -24,11 +24,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={!isLoggedIn ? <LandingPage /> : <Navigate to="/home" />}
-          />
+          <Route exact path="/" element={!isLoggedIn ? <LandingPage /> : <Navigate to="/home" />}/>
           <Route
             exact
             path="/register"
@@ -38,7 +34,7 @@ function App() {
             path="/home"
             element={
               <PrivateRoute
-                Component={<HomePage />}
+                Component={<Home />}
                 protectCondition={isLoggedIn}
                 redirectTo="/login"
               />
@@ -59,10 +55,19 @@ function App() {
             path="/login"
             element={!isLoggedIn ? <LoginPage /> : <Navigate to="/home" />}
           />
+
+          <Route
+            exact
+            path="*"
+            element={
+              !isLoggedIn ? <Navigate to="/login" /> : <Navigate to="/home" />
+            }
+          />
+
           <Route exact path="/send/:username?" element={<SendMessage />} />
         </Routes>
-        <Footer />
       </Router>
+      <Footer />
     </div>
   );
 }

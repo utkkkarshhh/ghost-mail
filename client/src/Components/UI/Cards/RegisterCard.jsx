@@ -16,7 +16,11 @@ const RegisterCard = () => {
   const registerHandler = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${baseUrl}/register`, { email, username, password });
+      await axios.post(`${baseUrl}/user/registerUser`, {
+        email,
+        username,
+        password,
+      });
       setEmail("");
       setUsername("");
       setPassword("");

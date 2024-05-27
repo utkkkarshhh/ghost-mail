@@ -6,11 +6,11 @@ import { IoSettingsSharp } from "react-icons/io5";
 import SuperButton from "../UI/Buttons/SuperButton";
 import { Link } from "react-router-dom";
 import Avatar from "../../assets/images/Avatar.jpeg";
-import { MdUploadFile } from "react-icons/md";
 import Divider from "../Reusables/Divider";
-import { baseUrl } from "../data/baseUrl";
 import axios from "axios";
 import AuthContext from "../store/AuthContext";
+import { jwtDecode } from "jwt-decode";
+var Buffer = require("buffer/").Buffer;
 
 const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,29 +19,49 @@ const ProfilePage = () => {
 
   const { onLogout } = useContext(AuthContext);
 
-  //Form State
+  // Form State
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageBase64, setImageBase64] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  const accountDeleteHandler = (event) => {
-    console.log(event);
+  useEffect(() => {
+    if (image) {
+      const url = getImageUrl(image);
+      setImageUrl(url);
+    }
+  }, [image]); 
+
+  const getImageUrl = (imageData) => {
+    if (!imageData) return null;
+
+    if (imageData.type === "Buffer" && Array.isArray(imageData.data)) {
+      const base64String = Buffer.from(imageData.data).toString("base64");
+      return `data:image/jpeg;base64,${base64String}`;
+    } else {
+      console.error("Invalid image data format:", imageData);
+      return null;
+    }
+  };
+
+  const accountDeleteHandler = async (event) => {
+    event.preventDefault();
     try {
-      axios.delete(`${baseUrl}/deleteAccount`, { data: { username: "" } });
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/user/deleteAccount`,
+        {
+          data: { username: "" },
+        }
+      );
       alert("We hate to see you go!");
       onLogout();
     } catch (error) {
       alert("Error deleting your account");
-      console.log("Error deleting your account!", error);
+      console.error("Error deleting your account!", error);
     }
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const profileOpener = () => {
     setIsProfileOpen(true);
@@ -53,8 +73,78 @@ const ProfilePage = () => {
     setIsSettingsOpen(true);
   };
 
-  const handleSubmit = () => {
-    console.log(name, dob, gender);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+          console.log("Access token not found!");
+          return;
+        }
+        const decodedData = jwtDecode(accessToken);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/user/userInformation`,
+          { params: { decodedData } }
+        );
+        const userProfile = response.data.user;
+        console.log(userProfile);
+        setName(userProfile.name);
+        setDob(userProfile.birthday);
+        setGender(userProfile.gender);
+        if (userProfile.image) {
+          setImage(userProfile.image);
+        } else {
+          setImage(Avatar);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const imageData = Buffer.from(reader.result);
+
+      setImage(imageData);
+      setImageBase64(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        console.log("Access token not found!");
+        return;
+      }
+      const decodedData = jwtDecode(accessToken);
+      await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/user/updateInformation`,
+        {
+          name,
+          dob,
+          gender,
+          image: imageBase64,
+        },
+        { params: { decodedData } }
+      );
+      alert("Profile updated successfully!");
+    } catch (err) {
+      console.error("Error updating user information:", err);
+    }
   };
 
   return (
@@ -92,44 +182,36 @@ const ProfilePage = () => {
                   <h1>
                     Your <span className={styles.profilePageSpan}>Profile</span>
                   </h1>
-                  <div className={styles.userCredentials}>
-                    <div className={styles.profilePicture}>
-                      <img
-                        className={styles.settingsPicture}
-                        src={Avatar}
-                        alt="Avatar"
-                      ></img>
-                    </div>
-                    <div className={styles.settingPictureButtons}>
-                      <form method="POST">
+                  <form className={styles.profileForm} onSubmit={handleSubmit}>
+                    <div className={styles.userCredentials}>
+                      <div className={styles.profilePicture}>
+                        {imageUrl && (
+                          <img
+                            className={styles.settingsPicture}
+                            src={imageUrl}
+                            alt="Avatar"
+                          />
+                        )}
+                      </div>
+                      <div className={styles.settingPictureButtons}>
                         <input
                           className={styles.enterImageInput}
                           type="file"
-                          alt="insert_image"
                           id="profile_picture"
                           name="profile_picture"
-                        ></input>
-                        <button
-                          className={styles.imageInputButton}
-                          type="submit"
-                        >
-                          <MdUploadFile />
-                        </button>
-                      </form>
+                          accept=".jpeg, .png, .jpg, .webp"
+                          onChange={handleImageChange}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.userInformation}>
-                    <h2 className={styles.userInformationHeading}>
-                      <span className={styles.profilePageSpan}>
-                        Edit/update{" "}
-                      </span>
-                      personal information
-                    </h2>
-                    <Divider text="Update/Edit" />
-                    <form
-                      className={styles.profileForm}
-                      onSubmit={handleSubmit}
-                    >
+                    <div className={styles.userInformation}>
+                      <h2 className={styles.userInformationHeading}>
+                        <span className={styles.profilePageSpan}>
+                          Edit/update{" "}
+                        </span>
+                        personal information
+                      </h2>
+                      <Divider text="Update/Edit" />
                       <div className={styles.formGroup}>
                         <label htmlFor="name">Name:</label>
                         <input
@@ -160,21 +242,21 @@ const ProfilePage = () => {
                           onChange={(e) => setGender(e.target.value)}
                         >
                           <option value="">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                           <option value="other">Other</option>
                         </select>
                       </div>
-
                       <SuperButton
                         type="submit"
                         title="Submit"
                         className={styles.submitButton}
                       />
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               )}
+
               {isSettingsOpen && (
                 <div className={styles.settingsSection}>
                   <h1>
