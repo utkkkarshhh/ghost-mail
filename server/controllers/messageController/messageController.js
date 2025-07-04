@@ -1,4 +1,4 @@
-const Message = require("../models/MessageModel");
+const Message = require("../../models/MessageModel");
 const profanity = require("profanity-hindi");
 const moment = require("moment");
 

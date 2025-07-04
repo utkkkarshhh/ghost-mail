@@ -80,7 +80,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [secrets]);
+  }, []);
 
   return (
     <Fragment>

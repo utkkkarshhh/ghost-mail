@@ -16,10 +16,6 @@ dotenv.config();
 // Db Connection
 dbConnection(process.env.DB_URL);
 
-app.get("/", (req, res) => {
-  res.json(apiDetails);
-});
-
 //Routes
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
